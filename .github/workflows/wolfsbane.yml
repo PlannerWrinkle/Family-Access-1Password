@@ -1,0 +1,32 @@
+name: "badger"
+run-name: "RAPIDS"
+"on":
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+permissions:
+  pages: write
+  id-token: write
+  contents: read
+jobs:
+  Snapdragon:
+    concurrency:
+      group: "Sandalwood-${{ github.ref_name }}"
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    environment:
+      name: "github-pages"
+      url: ${{ steps.MOSS.outputs.page_url }}
+    steps:
+      - name: "Onyx"
+        uses: actions/checkout@v7
+      - name: "feather"
+        uses: actions/configure-pages@v5
+      - name: "DILL"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./
+      - name: "Caldera"
+        id: MOSS
+        uses: actions/deploy-pages@v4
