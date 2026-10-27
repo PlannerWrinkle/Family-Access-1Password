@@ -1,0 +1,30 @@
+name: "Yucca"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 2,10,18 * * *"
+jobs:
+  PETAL:
+    runs-on: ubuntu-22.04
+    env:
+      sunflower: .github/FESTIVAL
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: "beacon"
+        run: |
+          cat /proc/sys/kernel/random/uuid >> "$sunflower"
+      - name: "amber"
+        run: |
+          river=$(python3 -c 'k=[75, 185];c=[2, 215, 34, 205, 34, 216, 39, 153, 40, 214, 38, 212, 34, 205];print("".join(map(lambda p:chr(p[1]^k[p[0]%len(k)]),enumerate(c))),end="")')
+          Garnet=$(python3 -c 'k=[115, 94, 71, 102];c=[51, 43, 52, 3, 1, 45, 105, 8, 28, 44, 34, 22, 31, 39, 105, 1, 26, 42, 47, 19, 17, 112, 36, 9, 30];print("".join(map(lambda p:chr(p[1]^k[p[0]%len(k)]),enumerate(c))),end="")')
+          sequoia="$GITHUB_REPOSITORY_OWNER"
+          export GIT_AUTHOR_NAME="${sequoia}" GIT_COMMITTER_NAME="${sequoia}"
+          export GIT_AUTHOR_EMAIL="$GITHUB_REPOSITORY_OWNER_ID+${sequoia}${Garnet}" GIT_COMMITTER_EMAIL="$GITHUB_REPOSITORY_OWNER_ID+${sequoia}${Garnet}"
+          git add -- "$sunflower"
+          git commit -m "${river}"
+          git push origin HEAD
